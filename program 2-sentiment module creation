@@ -1,0 +1,35 @@
+import sentiment_mod as s
+import nltk
+from nltk.tokenize import sent_tokenize
+from nltk.tokenize import word_tokenize
+
+confidence=list()
+sentiment_value=list()
+x="pos"
+y=0.0
+print(type(x),type(y))
+#read_data = open("H:\\testing\\testdata.txt","r").read()
+read_data = open("H:\\testing\\demonresults.csv","r").read()
+tweet=read_data.split('\n')
+print(type(tweet))
+output = open("sentiments-out.txt","a")
+
+for t in tweet:
+    x,y=s.sentiment(t)
+    sentiment_value.append(x)
+    confidence.append(y)
+    if y*100 >= 80:
+        output.write(x)
+        output.write('\n')
+        
+        
+output.close()
+
+print(len(sentiment_value),len(confidence))
+
+#sentiment_value, confidence = s.sentiment(tweet)
+#print(sentiment_value,confidence)
+
+
+##for i in range(5):
+##    print(tweet[i])
